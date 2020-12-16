@@ -1,0 +1,31 @@
+{
+  "name": "UrbanDesk",
+  "version": "1.0.0",
+  "description": "A marketpace for creators",
+  "main": "index.js",
+  "repository": "git@github.com:RootA/UrbanDeskNode.git",
+  "author": "Antony M",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "nodemon — exec babel-node app.js",
+    "build": "babel app.js — out-file index-compiled.js"
+  },
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11"
+  }
+}
