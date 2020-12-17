@@ -1,30 +1,30 @@
 const mongoose = require("mongoose");
 const { dbUrl } = require("./index");
-let winston = require("./winston");
+let logger = require("../loaders/logger");
 
 module.exports = function() {
     mongoose.set("useCreateIndex", true);
     mongoose.set("useFindAndModify", false);
 
     mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
-        winston.log("debug", "Database Connected");
+        logger.info("Database Connected");
     }).catch((error) => {
-        winston.log("error", `Error while connecting to database: ${error}`);
-        require("applicationinsights").defaultClient.trackException({exception: error});
+        logger.error(`Error while connecting to database: ${error}`);
+        // require("applicationinsights").defaultClient.trackException({exception: error});
     });
 
     mongoose.connection.on("error", (err) => {
-        winston.log("error", `Connection failed error => ${err}`);
-        require("applicationinsights").defaultClient.trackException({exception: error});
+        logger.error(`Connection failed error => ${err}`);
+        // require("applicationinsights").defaultClient.trackException({exception: error});
     });
 
     mongoose.connection.on("disconnected", () => {
-        winston.log("debug", "Database connection has been disconnected");
+        logger.error("Database connection has been disconnected");
     });
 
     process.on("SIGINT", () => {
         mongoose.connection.close(() => {
-            winston.log("warn", "connection drop due to application termination");
+            logger.warn("connection drop due to application termination");
             process.exit(0);
         });
     });
