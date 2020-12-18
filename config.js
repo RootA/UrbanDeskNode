@@ -2,6 +2,9 @@ let express = require("express");
 let morgan = require("morgan");
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
+const jwt = require('./_helpers/jwt');
+const errorHandler = require('./_helpers/error_handler');
+
 
 module.exports = function(app, logger) {
     app.use(helmet.hidePoweredBy())
@@ -16,7 +19,9 @@ module.exports = function(app, logger) {
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
     app.use(morgan("combined", { stream: logger.stream }))
-    app.use(cookieParser())
+    app.use(cookieParser());
+    // use JWT auth to secure the api
+    app.use(jwt());
 
     // error handler
     app.use(function(err, req, res, next) {
@@ -31,4 +36,7 @@ module.exports = function(app, logger) {
         res.status(err.status || 500);
         res.render('error');
     });
+
+    // global error handler
+    app.use(errorHandler);
 };

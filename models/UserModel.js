@@ -34,4 +34,14 @@ var userSchema = new Schema({
     timestamps: true
 });
 
+// defines properties to bring in the API endpoint
+userSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) {
+        delete ret._id;
+        delete ret.hash;
+    }
+});
+
 module.exports = mongoose.model('User', userSchema);

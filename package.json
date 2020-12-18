@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",
     "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",

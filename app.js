@@ -12,6 +12,9 @@ require("./config/database")();
 require("./config")(app, logger);
 require("./api/routes/index")(app, logger);
 
+// api routes
+app.use('/users', require('./services/users/user.service'));
+
 server.listen(port);
 logger.info(`Your application is running on ${endpoint}:${port}`);
 
